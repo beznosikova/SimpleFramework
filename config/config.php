@@ -1,6 +1,6 @@
 <?php
 
-Config::set('site_name', 'Your site name');
+Config::set('site_name', 'Simplex');
 
 Config::set('languages', array('en', 'ru'));
 
