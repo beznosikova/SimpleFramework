@@ -83,9 +83,6 @@ class Router
         $path = $uri_parts[0];
 
         $path_parts = explode('/', $path);
-//        echo "<pre>";
-//        print_r($this->route);
-//        echo "</pre>";
 
         if (count($path_parts)){
 

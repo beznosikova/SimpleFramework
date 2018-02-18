@@ -19,3 +19,10 @@ function __autoload($class_name)
     }
 
 }
+
+function pr($var)
+{
+    echo "<pre>";
+    print_r($var);
+    echo "</pre>";
+}
