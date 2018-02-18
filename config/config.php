@@ -2,7 +2,7 @@
 
 Config::set('site_name', 'Your site name');
 
-Config::set('languages', array('en', 'fr'));
+Config::set('languages', array('en', 'ru'));
 
 // Routes. Route name => method prefix
 Config::set('routes', array(

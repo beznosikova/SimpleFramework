@@ -15,6 +15,8 @@ class App
     {
         self::$router = new Router($uri);
 
+        Lang::load(self::$router->getLanguage());
+
         $controller_class = ucfirst(self::$router->getController()).'Controller';
         $controller_method = strtolower(self::$router->getMethodPrefix().self::$router->getAction());
 
