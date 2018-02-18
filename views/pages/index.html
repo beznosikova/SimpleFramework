@@ -1,2 +1,5 @@
-This is the index.html
-<?=$data["content"]?>
+<?php foreach ($data["pages"] as $page):?>
+    <div style="margin-top: 20px;">
+        <a href="/pages/view/<?=$page['alias']?>"><?=$page['title']?></a>
+    </div>
+<?php endforeach;?>
