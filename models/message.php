@@ -20,4 +20,11 @@ class Message extends Model
 
         return $this->db->query($sql);
     }
+
+    public function getList($only_published = false)
+    {
+        $sql = "select * from messages where 1";
+        return $this->db->query($sql);
+    }
+
 }
