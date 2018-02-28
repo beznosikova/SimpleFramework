@@ -21,3 +21,6 @@ Config::set('db.psw', '');
 Config::set('db.db_name', 'mvc');
 
 Config::set('salt', 'dio878ma0dkfd4+kf7s*k');
+
+Config::set('login_pattern', '/\b[a-zA-Z0-9._\-]{5,10}\b/i');
+Config::set('psw_pattern', '/\b.{5,10}\b/i');

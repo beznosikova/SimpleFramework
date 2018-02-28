@@ -26,4 +26,34 @@ class UsersController extends Controller
         Router::redirect('/admin/');
     }
 
+    public function register()
+    {
+        if ($_POST && isset($_POST['register'])&& $_POST['register'] != ""){
+
+            $errorStr = "";
+
+            $login = htmlspecialchars($_POST['login']);
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $password_second = htmlspecialchars($_POST['password_second']);
+
+            $errorStr .= $this->model->loginValidation($login);
+            $errorStr .= $this->model->emailValidation($email);
+            $errorStr .= $this->model->pswValidation($password, $password_second);
+
+
+            if (empty($errorStr)){
+                $data = compact("login", "email", "password");
+                $result = $this->model->register($data);
+                if ($result){
+                    Session::setFlash("Registration success!");
+                    Session::set('login', $login);
+                    Session::set('role', 'user');
+                    $this->data = "success";
+                }
+            } else {
+                Session::setFlash($errorStr);
+            }
+        }
+    }
 }
