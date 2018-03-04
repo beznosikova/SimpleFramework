@@ -1,22 +1,62 @@
 <?php if ($data != "success"):?>
     <h3>Register</h3>
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" id="login" name="login" class="form-control">
+    <form action="" method="post" novalidate>
+        <div class="input-wrapper">
+            <label for="login" class="place-holder <?php if (!empty($data['login'])) echo "place-top";?>">Login</label>
+            <input
+                    type="text"
+                    id="login"
+                    name="login"
+                    value="<?php echo $data['login'];?>"
+                    class="input-register"
+                    data-func="validLogin"
+                    data-pattern="<?php echo Config::get("login_pattern")?>"
+            >
+            <div class="text-error"></div>
         </div>
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" class="form-control">
+        <div class="input-wrapper">
+            <label for="email" class="place-holder <?php if (!empty($data['email'])) echo "place-top";?>">E-mail</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="<?php echo $data['email'];?>"
+                    class="input-register"
+                    data-func="validEmail"
+            >
+            <div class="text-error"></div>
         </div>
-        <div class="form-group">
-            <label for="psw">Password</label>
-            <input type="password" id="psw" name="password" class="form-control">
+        <div class="input-wrapper">
+            <label for="psw" class="place-holder">Password</label>
+            <input
+                    type="password"
+                    id="psw"
+                    name="password"
+                    value=""
+                    class="input-register"
+                    data-func="validPsw"
+            >
+            <div class="text-error"></div>
         </div>
-        <div class="form-group">
-            <label for="psw_second">Repeat password</label>
-            <input type="password" id="psw_second" name="password_second" class="form-control">
+        <div class="input-wrapper">
+            <label for="psw_second" class="place-holder">Repeat password</label>
+            <input
+                    type="password"
+                    id="psw_second"
+                    name="password_second"
+                    value=""
+                    class="input-register"
+                    data-func="validPsw"
+            >
+            <div class="text-error"></div>
         </div>
-        <input type="submit" class="btn btn-success" name="register" value="Send"/ >
+        <input
+                type="submit"
+                id="btn"
+                class="btn btn-success"
+                name="register"
+                value="Send"
+                disabled
+        >
     </form>
 <?php endif;?>

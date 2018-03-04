@@ -3,12 +3,46 @@ form {
     max-width: 400px;
     margin: 0 auto;
 }
-
 .alert {
     width: 400px;
     max-width: 400px;
     margin: 0 auto;
     margin-bottom: 30px;
 }
-
 .new-page-btn {text-align: left;}
+
+input {width: 100%;}
+
+.input-wrapper {
+    position: relative;
+    height: 65px;
+}
+.input-wrapper:nth-last-child {margin-bottom: 20px;}
+.input-register {
+    font-size: 16px;
+    line-height: 32px;
+    padding-left: 9px;
+    border: 0;
+    border-bottom: 1px solid green;
+    outline: none;
+}
+.input-red {border-bottom: 1px solid red;}
+
+.place-holder {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    color: gray;
+    transition: 0.5s;
+}
+.place-top {
+    top: -8px;
+    left: 0;
+}
+
+.text-error{
+    height: 12px;
+    font-size: 10px;
+    color: red;
+}

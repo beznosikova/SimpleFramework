@@ -41,9 +41,9 @@ class UsersController extends Controller
             $errorStr .= $this->model->emailValidation($email);
             $errorStr .= $this->model->pswValidation($password, $password_second);
 
+            $data = compact("login", "email", "password");
 
             if (empty($errorStr)){
-                $data = compact("login", "email", "password");
                 $result = $this->model->register($data);
                 if ($result){
                     Session::setFlash("Registration success!");
@@ -52,6 +52,7 @@ class UsersController extends Controller
                     $this->data = "success";
                 }
             } else {
+                $this->data = $data;
                 Session::setFlash($errorStr);
             }
         }
