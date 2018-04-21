@@ -1,0 +1,20 @@
+<div class="card">
+	<h5 class="card-title"><?=$data['item']['title']?></h5>	
+	<img 
+		class="card-img-top" 
+		src="/uploads/<?=$data['item']['photo_name']?>" 
+		alt="<?=$data['item']['title']?>"
+	>
+	<div class="card-body">
+	<p class="card-text"><?=$data['item']['content']?></p>
+	</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Readed:</b> <?=$data['item']['readed']?></li>
+  </ul>
+  <!-- tags -->
+  <div class="card-body">
+  	<?foreach ($data['item']['tags'] as $tag):?>
+	    <a href="/news/search/?tags=<?=trim($tag)?>" class="card-link"><?=$tag?></a>
+    <?endforeach;?>
+  </div>
+</div>

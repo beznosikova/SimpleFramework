@@ -1,0 +1,7 @@
+<div class="list-group">
+<?php foreach ($data["sections"] as $section):?>
+  <a href="/news/section/<?=$section['alias']?>" class="list-group-item list-group-item-action">
+  	<?=$section['title']?>
+  </a>
+<?php endforeach;?>
+</div>

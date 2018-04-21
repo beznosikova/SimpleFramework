@@ -65,6 +65,14 @@ class Router
         return $this->method_prefix;
     }
 
+    public function getPaginationUrl()
+    {
+        if ($this->action != "search")
+            return implode('/', ['',$this->controller, $this->action, $this->params[0],'']);
+        else
+            return implode('/', ['',$this->controller, $this->action,'']);
+    }    
+
     public function __construct($uri)
     {
         $this->uri = urldecode(trim($uri, '/'));
