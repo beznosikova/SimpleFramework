@@ -12,7 +12,7 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
     <link rel="stylesheet" href="/webroot/css/style.css?v=26">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script data-require="MomentJS@2.10.0" data-semver="2.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 </head>
 <body>
@@ -42,10 +42,26 @@
                     </div>
                 </li>                
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <div class="btn-group dropdown">
+            <form 
+                class="form-inline my-2 my-lg-0" 
+                method="get" 
+                action="/news/search/"
+                id="form-search" 
+                >
+              <input 
+                class="form-control mr-sm-2" 
+                type="text" 
+                placeholder="Search" 
+                aria-label="Search" 
+                id="search-top"
+                name="tags[]" 
+                autocomplete="off"
+            >
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>            
+              <div class="dropdown-menu"></div> 
+            </form>  
+        </div>         
         </div>
     </nav>
 
@@ -74,6 +90,7 @@
     </main>
 
     <script src="/webroot/js/valid.js?v=43"></script>
+    <script src="/webroot/js/custom.js?v=1"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

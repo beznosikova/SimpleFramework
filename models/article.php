@@ -74,7 +74,7 @@ class Article extends Model
     {
         $sqlParams = $this->validationGet($getParams);
         if (empty($sqlParams))
-            return [];
+            return 0;
 
         $sql = "SELECT COUNT(news.title) as cnt 
                     FROM news 
@@ -124,7 +124,7 @@ class Article extends Model
 
         }
 
-        if (!empty($getParams['tags'])){
+        if (!empty($getParams['tags']) && !empty(implode('', $getParams['tags']))){
             foreach ($getParams['tags'] as $tag) {
                 $newGetParams["tags"][] = $this->db->escape($tag);
             }
@@ -132,6 +132,7 @@ class Article extends Model
         }
         return $sqlParams;
     }
+   
 /*
     public function getById($id)
     {

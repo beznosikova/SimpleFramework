@@ -33,7 +33,6 @@ class App
 
         // Calling controller's method
         $controller_object = new $controller_class();
-
         if (method_exists($controller_object, $controller_method)){
             $view_path = $controller_object->$controller_method();
             $view_object = new View($controller_object->getData(), $view_path);

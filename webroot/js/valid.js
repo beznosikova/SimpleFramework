@@ -4,7 +4,7 @@ window.onload = function (){
         inputs[i].addEventListener('focus', focusInput, false);
         inputs[i].addEventListener('blur', blurInput, false);
     }
-    document.forms[0].addEventListener('submit', formValid, false);
+    // document.forms[0].addEventListener('submit', formValid, false);
 }
 
 function focusInput(e){
@@ -98,7 +98,6 @@ function addRedStyle(input, error, text)
 
 function formValid()
 {
-    debugger;
     var valid = true;
     var parent, error;
     var inputs = document.getElementsByClassName("input-register");

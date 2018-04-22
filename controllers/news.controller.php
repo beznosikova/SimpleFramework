@@ -60,12 +60,23 @@ class NewsController extends Controller
         }
     }    
 
-/*
+    public function ajax()
+    {
+        if (!empty($_GET['tags'])){
+            $items = $this->model->getSearchList(['tags' => $_GET['tags']]);
+            $view_object = new View($items);
+            $content = $view_object->render();            
+            echo $content;
+        }
+        die();
+    }        
+
+
     public function admin_index()
     {
         $this->data['pages'] = $this->model->getList();
     }
-
+/*
     public function admin_add()
     {
         if ($_POST){
