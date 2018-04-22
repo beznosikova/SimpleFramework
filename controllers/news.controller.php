@@ -74,52 +74,67 @@ class NewsController extends Controller
 
     public function admin_index()
     {
-        $this->data['pages'] = $this->model->getList();
+        $this->data['sections'] = $this->model->getSections();
     }
-/*
-    public function admin_add()
+
+    public function admin_section()
+    {
+        $method = ($this->params[0]) ? "admin_section_".$this->params[0] : "admin_index";
+
+        if (method_exists("NewsController", $method)){
+            $this->$method();
+            return VIEWS_PATH.DS."news".DS.$method.".html";
+
+        } else {
+            throw new Exception("Method ".$controller_method." of class ".$controller_class. " does not exist!");
+        }        
+    }    
+
+    public function admin_section_add()
     {
         if ($_POST){
-            $result = $this->model->save($_POST);
+            $result = $this->model->saveSection($_POST);
             if ($result){
                 Session::setFlash("Page was saved.");
             } else {
                 Session::setFlash("Error.");
             }
-            Router::redirect('/admin/pages/');
+            Router::redirect('/admin/news/section/');
         }
     }
 
-    public function admin_edit()
+    public function admin_section_edit()
     {
         if ($_POST){
             $id = isset($_POST["id"]) ? $_POST["id"] : null;
-            $result = $this->model->save($_POST, $id);
+            $result = $this->model->saveSection($_POST, $id);
             if ($result){
                 Session::setFlash("Page was saved.");
             } else {
                 Session::setFlash("Error.");
             }
-            Router::redirect('/admin/pages/');
+            Router::redirect('/admin/news/section/');
         }
 
-        if (isset($this->params[0])){
-            $this->data['page'] = $this->model->getById($this->params[0]);
+        if (isset($this->params[1])){
+            $this->data['section'] = $this->model->getSectionById($this->params[1]);
         } else {
             Session::setFlash('Wrong page id.');
-            Router::redirect('/admin/pages/');
+            Router::redirect('/admin/news/section/');
         }
     }
-    public function admin_delete()
+
+
+    public function admin_section_delete()
     {
-        if ( isset($this->params[0]) ){
-            $result = $this->model->delete($this->params[0]);
+        if ( isset($this->params[1]) ){
+            $result = $this->model->deleteSection($this->params[1]);
             if ($result){
                 Session::setFlash("Page was saved.");
             } else {
                 Session::setFlash("Error.");
             }
         }
-        Router::redirect('/admin/pages/');
-    }*/
+        Router::redirect('/admin/news/section/');
+    }
 }

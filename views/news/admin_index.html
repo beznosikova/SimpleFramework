@@ -1,0 +1,17 @@
+<h3>Sections</h3><br>
+<table class="table table-striped" style="width: 400px">
+    <?php foreach ($data["sections"] as $section):?>
+    <tr>
+        <td><b><?=$section["title"]?></b></td>
+        <td align="right">
+            <a href="/admin/news/section/edit/<?=$section['id']?>"><button class="btn btn-sm btn-primary">edit</button></a>
+            <a href="/admin/news/section/delete/<?=$section['id']?>" onclick="return confirmDelete()"><button class="btn btn-sm btn-warning">delete</button></a>
+        </td>
+    </tr>
+    <?php endforeach;?>
+</table>
+
+<br>
+<div class="new-page-btn">
+    <a href="/admin/news/section/add/"><button class="btn btn-sm btn-success">New section</button></a>
+</div>

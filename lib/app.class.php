@@ -25,6 +25,7 @@ class App
         $controller_method = strtolower(self::$router->getMethodPrefix().self::$router->getAction());
 
         $layout = self::$router->getRoute();
+// pr($layout);
         if ($layout == 'admin' && Session::get('role') != 'admin'){
             if ($controller_method != 'admin_login'){
                 Router::redirect('/admin/users/login');
@@ -40,6 +41,14 @@ class App
         } else {
             throw new Exception("Method ".$controller_method." of class ".$controller_class. " does not exist!");
         }
+
+        // //menu 
+        // $pages_controller = new PagesController();
+        // $pages_controller->index();
+        // pr($pages_controller->getData());
+        // $view_pages = new View($pages_controller->getData());
+        // $pages = $view_pages->render();
+        // pr($pages);
 
         $layout_path = VIEWS_PATH.DS. $layout.'.html';
         $layout_view_object = new View(compact('content'), $layout_path);
