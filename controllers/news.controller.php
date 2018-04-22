@@ -23,6 +23,7 @@ class NewsController extends Controller
             $this->pagination = new Pagination($this->model->getSectionListCount($alias), $pageUrl);
             $this->data['items'] = $this->model->getSectionList($alias, $this->pagination->getSqlLimit());
             $this->data['pagination'] = (array)$this->pagination;
+            $this->data['filter'] = $this->model->getFilterItems();
         } else {
             Router::redirect('/news/');
         }
@@ -49,19 +50,14 @@ class NewsController extends Controller
     public function search()
     {
         $params = App::getRouter()->getParams();
-pr($params);
-        // if (isset($params[0])){
-        //     $alias = strtolower($params[0]);
-        //     $news = $this->model->getByAlias($alias);
-        //     if ($news['tags']){
-        //         $news['tags'] = explode(',', $news['tags']);
-        //     }
-        //     $this->data['item'] = $news;
-        //     // save to readed
-        //     $this->model->updateReaded($this->data['item']['id'], $this->data['item']['readed']);
-        // } else {
-        //     Router::redirect('/news/');
-        // }
+        if ($_GET){
+            $pageUrl = ($params[0])? $params[0]: "";
+            $this->pagination = new Pagination($this->model->getSearchListCount($_GET), $pageUrl);
+            $this->data['items'] = $this->model->getSearchList($_GET, $this->pagination->getSqlLimit());
+            $this->data['pagination'] = (array)$this->pagination;
+        } else {
+            $this->data['message'] = 'Choose data for search!';
+        }
     }    
 
 /*

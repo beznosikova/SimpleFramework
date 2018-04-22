@@ -14,7 +14,7 @@
   <!-- tags -->
   <div class="card-body">
   	<?foreach ($data['item']['tags'] as $tag):?>
-	    <a href="/news/search/?tags=<?=trim($tag)?>" class="card-link"><?=$tag?></a>
+	    <a href="/news/search/?tags[]=<?=trim($tag)?>" class="card-link"><?=$tag?></a>
     <?endforeach;?>
   </div>
 </div>

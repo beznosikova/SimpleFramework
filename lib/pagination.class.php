@@ -16,6 +16,8 @@ class Pagination
             $this->page = 1;
 
         $this->curentPage = App::getRouter()->getPaginationUrl();
+        if (!empty($_GET))
+            $this->queryString = $_SERVER["QUERY_STRING"];
     }
 
     private function calcPage($pageUrl)
@@ -32,6 +34,7 @@ class Pagination
 
     public function getSqlLimit()
     {
-        return "LIMIT ".($this->page-1).",".(Config::get('pagination_limit'));
+        $paginationLimit = Config::get('pagination_limit');
+        return "LIMIT ".($paginationLimit*($this->page-1)).",".$paginationLimit;
     }
 }
