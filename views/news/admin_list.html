@@ -1,0 +1,20 @@
+<!-- news -->
+<h5>News list</h5>
+<h5>Section - <?=$data['section']['title']?></h5>
+
+<table class="table table-striped" >
+    <?php foreach ($data["items"] as $item):?>
+    <tr>
+        <td><b><?=$item["title"]?></b></td>
+        <td align="right">
+            <a href="/admin/news/detail/edit/<?=$item['id']?>"><button class="btn btn-sm btn-primary">edit</button></a>
+            <a href="/admin/news/detail/delete/<?=$item['id']?>" onclick="return confirmDelete()"><button class="btn btn-sm btn-warning">delete</button></a>
+        </td>
+    </tr>
+    <?php endforeach;?>
+</table>
+
+<br>
+<div class="new-page-btn">
+    <a href="/admin/news/detail/add/"><button class="btn btn-sm btn-success">Add news</button></a>
+</div>

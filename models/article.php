@@ -142,6 +142,15 @@ class Article extends Model
         return isset($result[0]) ? $result[0] : null;
     }
 
+    public function getSectionByAlias($alias)
+    {
+        $alias = $this->db->escape($alias);
+        $sql = "select * from section where alias = '{$alias}' limit 1";
+        $result = $this->db->query($sql);
+        return isset($result[0]) ? $result[0] : null;
+    }
+
+
     public function saveSection($data, $id = null)
     {
         if (!isset($data['alias']) || !isset($data['title'])){

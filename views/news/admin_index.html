@@ -1,9 +1,11 @@
 <h3>Sections</h3><br>
-<table class="table table-striped" style="width: 400px">
+<table class="table table-striped">
     <?php foreach ($data["sections"] as $section):?>
     <tr>
         <td><b><?=$section["title"]?></b></td>
         <td align="right">
+            <a href="/admin/news/list/<?=$section['alias']?>"><button class="btn btn-sm btn-success">List of news</button></a>
+
             <a href="/admin/news/section/edit/<?=$section['id']?>"><button class="btn btn-sm btn-primary">edit</button></a>
             <a href="/admin/news/section/delete/<?=$section['id']?>" onclick="return confirmDelete()"><button class="btn btn-sm btn-warning">delete</button></a>
         </td>

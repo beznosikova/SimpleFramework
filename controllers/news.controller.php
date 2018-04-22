@@ -124,7 +124,6 @@ class NewsController extends Controller
         }
     }
 
-
     public function admin_section_delete()
     {
         if ( isset($this->params[1]) ){
@@ -137,4 +136,15 @@ class NewsController extends Controller
         }
         Router::redirect('/admin/news/section/');
     }
+
+    public function admin_list()
+    {
+        if (isset($this->params[0])){
+            $alias = strtolower($this->params[0]);
+            $this->data['items'] = $this->model->getSectionList($alias);
+            $this->data['section'] = $this->model->getSectionByAlias($alias);
+        } else {
+            Router::redirect('/admin/news/section/');
+        }
+    }        
 }
