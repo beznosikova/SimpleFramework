@@ -146,5 +146,54 @@ class NewsController extends Controller
         } else {
             Router::redirect('/admin/news/section/');
         }
-    }        
+    } 
+
+    // methods for detail page of news
+    public function admin_detail()
+    {
+        $method = ($this->params[0]) ? "admin_detail_".$this->params[0] : "admin_index";
+
+        pr($method);
+        if (method_exists("NewsController", $method)){
+            $this->$method();
+            return VIEWS_PATH.DS."news".DS.$method.".html";
+
+        } else {
+            throw new Exception("Method ".$controller_method." of class ".$controller_class. " does not exist!");
+        }   
+    }       
+
+    public function admin_detail_add()
+    {
+        $this->data['sections'] = $this->model->getSections();
+
+        if ($_POST){
+            $result = $this->model->saveDetail(array_merge($_POST, $_FILES));
+            if ($result){
+                Session::setFlash("Page was saved.");
+            } else {
+                Session::setFlash("Error.");
+            }
+            Router::redirect('/admin/news/');
+        }
+    }
+
+    public function admin_detail_edit()
+    {
+        if ($_POST){
+            $result = $this->model->saveDetail(array_merge($_POST, $_FILES));
+            if ($result){
+                Session::setFlash("Page was saved.");
+            } else {
+                Session::setFlash("Error.");
+            }
+            Router::redirect('/admin/news/');
+        }
+        // pr($this->params);
+        $this->data['sections'] = $this->model->getSections();
+        $this->data['item'] = $this->model->getByAlias($this->params[1]);
+        // pr($this->data['item']);
+        if(empty($this->data['item']))
+            Session::setFlash("Error.");        
+    }         
 }

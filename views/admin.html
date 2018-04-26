@@ -20,12 +20,15 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <?php if (Session::get('login')):?>
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item  <?if (App::getRouter()->getController() == 'news') echo 'active'?>">
+                <a class="nav-link" href="/admin/news/">News</a>
+            </li>            
             <li class="nav-item <?if (App::getRouter()->getController() == 'pages') echo 'active'?>">
                 <a class="nav-link" href="/admin/pages/">Pages</a>
             </li>
             <li class="nav-item  <?if (App::getRouter()->getController() == 'contacts') echo 'active'?>">
                 <a class="nav-link" href="/admin/contacts/">Contact us</a>
-            </li>
+            </li>            
             <li class="nav-item">
                 <a class="nav-link" href="/admin/users/logout/">Logout</a>
             </li>

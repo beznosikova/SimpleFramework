@@ -7,8 +7,8 @@
     <tr>
         <td><b><?=$item["title"]?></b></td>
         <td align="right">
-            <a href="/admin/news/detail/edit/<?=$item['id']?>"><button class="btn btn-sm btn-primary">edit</button></a>
-            <a href="/admin/news/detail/delete/<?=$item['id']?>" onclick="return confirmDelete()"><button class="btn btn-sm btn-warning">delete</button></a>
+            <a href="/admin/news/detail/edit/<?=$item['alias']?>"><button class="btn btn-sm btn-primary">edit</button></a>
+            <a href="/admin/news/detail/delete/<?=$item['alias']?>" onclick="return confirmDelete()"><button class="btn btn-sm btn-warning">delete</button></a>
         </td>
     </tr>
     <?php endforeach;?>

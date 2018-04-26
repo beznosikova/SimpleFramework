@@ -1,0 +1,37 @@
+<h3>Add news</h3><br>
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="">
+    <div class="form-group">
+        <label for="alias">Alias</label>
+        <input type="text" id="alias" name="alias" value="" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="section">Section</label>
+        <select class="form-control" id="section" name="section">
+            <?foreach($data["sections"] as $section):?>
+                <option value="<?=$section['id']?>"><?=$section['title']?></option>
+            <?endforeach;?>
+        </select>
+    </div>   
+    <div class="form-group">
+        <label for="contentText">Content</label>
+        <textarea class="form-control" id="contentText" rows="3" name="content"></textarea>
+    </div>     
+    <div class="form-group">
+        <label for="tagsText">Enter tags, e.g. "finance, people"</label>
+        <input class="form-control" id="tagsText" rows="1" name="tags"/>
+    </div>    
+    <div class="form-group">
+        <label for="fileField">Select photo</label>
+        <input type="file" class="form-control-file" accept="image/jpeg,image/png,image/gif" id="fileField" name="photo">
+    </div>
+    <div class="form-group">
+        <label for="analyticsCheck">Is analytics?</label>
+        <input type="checkbox" id="analyticsCheck" name="is_analytics" checked="checked">
+    </div>    
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>

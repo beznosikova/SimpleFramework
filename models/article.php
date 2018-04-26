@@ -181,4 +181,60 @@ class Article extends Model
         $sql = "delete from section where id = {$id}";
         return $this->db->query($sql);
     }
+
+    public function saveDetail($data, $id = null)
+    {
+        if (!isset($data['alias']) 
+            || !isset($data['title'])
+            || !isset($data['section'])
+        ){
+            return false;
+        }
+
+        $sqlFields = [];
+
+        $id = (int) $data['id'];
+        $alias = $this->db->escape($data["alias"]);
+        $alias = str_replace(' ', '-', $alias);
+        $sqlFields[] = "alias = '{$alias}'";
+
+        $title = $this->db->escape($data["title"]);
+        $sqlFields[] = "title = '{$title}'";
+
+        $section = (int) $data["section"];
+        $sqlFields[] = "section = {$section}";
+
+        if (!empty($data["content"])){
+            $content = $this->db->escape($data["content"]);
+            $sqlFields[] = "content = '{$content}'";            
+        }
+
+        if (!empty($data["tags"])){
+            $tags = $this->db->escape($data["tags"]);
+            $sqlFields[] = "tags = '{$tags}'";            
+        }  
+        
+        if (!empty($data["is_analytics"])){
+            $sqlFields[] = "is_analytics = 1";            
+        }                
+        
+        $date = date("Y-m-d");
+
+        if (!empty($data["photo"]["name"]) && $data["photo"]["error"] == UPLOAD_ERR_OK) {
+            $dir = "/uploads";
+            $tmp_name = $data["photo"]["tmp_name"];
+            $name = basename($data["photo"]["name"]);
+            if (move_uploaded_file($tmp_name, "$dir/$name"))
+                $sqlFields[] = "photo_name = {$data["photo"]["name"]}";
+        }
+
+        if (!$id) { // Add new record
+            $sqlFields[] = "data = '{$date}'";
+            $sql = "insert into news set " . implode(", ", $sqlFields);
+        } else { // Update existing record
+            $sql = "update news set " . implode(", ", $sqlFields) . "where id = {$id}";
+        }
+    
+        return $this->db->query($sql);
+    }    
 }

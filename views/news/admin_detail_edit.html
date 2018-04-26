@@ -1,0 +1,43 @@
+<?if (!empty($data['item'])):?>
+<?//pr($data['item'])?>
+<h3>Edit news</h3><br>
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?=$data['item']['id']?>">
+    <div class="form-group">
+        <label for="alias">Alias</label>
+        <input type="text" id="alias" name="alias" value="<?=$data['item']['alias']?>" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="<?=$data['item']['title']?>" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="section">Section</label>
+        <select class="form-control" id="section" name="section">
+            <?foreach($data["sections"] as $section):?>
+                <option value="<?=$section['id']?>" <?php if ($data['item']['section'] == $section['id']) echo 'selected';?>><?=$section['title']?></option>
+            <?endforeach;?>
+        </select>
+    </div>   
+    <div class="form-group">
+        <label for="contentText">Content</label>
+        <textarea class="form-control" id="contentText" rows="3" name="content"><?=$data['item']['content']?></textarea>
+    </div>     
+    <div class="form-group">
+        <label for="tagsText">Enter tags, e.g. "finance, people"</label>
+        <input class="form-control" id="tagsText" rows="1" name="tags" value="<?=$data['item']['tags']?>"/>
+    </div>    
+    <div class="form-group">
+        <label for="fileField">Change photo</label>
+        <input type="file" class="form-control-file" accept="image/jpeg,image/png,image/gif" id="fileField" name="photo">
+        <?if (!empty($data['item']['photo_name'])):?>
+        <img src="/uploads/<?=$data['item']['photo_name']?>" alt="">
+        <?endif;?>
+    </div>
+    <div class="form-group">
+        <label for="analyticsCheck">Is analytics?</label>
+        <input type="checkbox" id="analyticsCheck" name="is_analytics" <?php if ($data['item']['is_analytics']) echo 'checked'?>>
+    </div>    
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>
+<?endif;?>
