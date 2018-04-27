@@ -28,4 +28,22 @@ $(document).ready(function(){
 			$('.dropdown-menu').removeClass("show"); 
 		}
 	});	
+
+	//subscriber
+	setTimeout(function() { $('#subsriber').modal('show') }, 15000);
+
 });
+
+
+var inFormOrLink;
+$(document).on('click', 'a', function() { inFormOrLink = true; });
+$(document).on('submit', 'form', function() { inFormOrLink = true; });
+
+$(window).bind('beforeunload', function(eventObject) {
+    var returnValue = undefined;
+    if (! inFormOrLink) {
+        returnValue = "Do you really want to close?";
+    }
+    eventObject.returnValue = returnValue;
+    return returnValue;
+}); 

@@ -67,10 +67,10 @@
 
     <main role="main" class="container">
 <div class="row">
-<div class="col">
+<div class="col-2">
   реклама
 </div>
-<div class="col-6">
+<div class="col-8">
         <div class="starter-template">
 
             <?php if ( Session::hasFlash() ):?>
@@ -82,13 +82,48 @@
             <?php echo $data['content'];?>
         </div>
 </div>
-<div class="col">
+<div class="col-2">
   реклама
 </div>
 </div>
 
     </main>
 
+    <!-- Modal begin -->
+    <div class="modal fade" id="subsriber" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Subscription Form</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-4 control-label">Full name</label>
+                    <div class="col-sm-8">
+                        <input type="twxt" value="" name="fullName" class="required email form-control" id="mce-EMAIL"/>
+                    </div>
+                </div>                
+                <div class="form-group remove-bottom">
+                    <div class="col-sm-offset-4 col-sm-8">
+                    <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default"/>
+                    </div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer remove-top">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal - end -->
     <script src="/webroot/js/valid.js?v=43"></script>
     <script src="/webroot/js/custom.js?v=1"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
