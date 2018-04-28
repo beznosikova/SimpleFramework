@@ -20,15 +20,6 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <?php if (Session::get('login')):?>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item  <?if (App::getRouter()->getController() == 'news') echo 'active'?>">
-                <a class="nav-link" href="/admin/news/">News</a>
-            </li>            
-            <li class="nav-item <?if (App::getRouter()->getController() == 'pages') echo 'active'?>">
-                <a class="nav-link" href="/admin/pages/">Pages</a>
-            </li>
-            <li class="nav-item  <?if (App::getRouter()->getController() == 'contacts') echo 'active'?>">
-                <a class="nav-link" href="/admin/contacts/">Contact us</a>
-            </li>            
             <li class="nav-item">
                 <a class="nav-link" href="/admin/users/logout/">Logout</a>
             </li>
@@ -38,16 +29,34 @@
 </nav>
 
 <main role="main" class="container">
-
-    <div class="starter-template">
-
-        <?php if ( Session::hasFlash() ):?>
-        <div class="alert alert-info" role="alert">
-            <?=Session::flash()?>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list-group navbar-fixed-left">
+                <ul class="nav navbar-nav ">
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/admin/news/"><span>News</span></a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/admin/advertising/"><span>Advertising</span></a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/admin/menu/"><span>Menu</span></a>
+                    </li>
+                    <li class="list-group-item list-group-item-action">
+                        <a href="/admin/theme/"><span>Theme</span></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <?php endif;?>
+        <div class="col-sm-9">
+                <?php if ( Session::hasFlash() ):?>
+                <div class="alert alert-info" role="alert">
+                    <?=Session::flash()?>
+                </div>
+                <?php endif;?>
 
-        <?php echo $data['content'];?>
+                <?php echo $data['content'];?>
+        </div>
     </div>
 </main>
 

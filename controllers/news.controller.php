@@ -24,6 +24,7 @@ class NewsController extends Controller
             $this->data['items'] = $this->model->getSectionList($alias, $this->pagination->getSqlLimit());
             $this->data['pagination'] = (array)$this->pagination;
             $this->data['filter'] = $this->model->getFilterItems();
+            $this->data['section'] = $this->model->getSectionByAlias($alias);
         } else {
             Router::redirect('/news/');
         }
@@ -153,7 +154,6 @@ class NewsController extends Controller
     {
         $method = ($this->params[0]) ? "admin_detail_".$this->params[0] : "admin_index";
 
-        pr($method);
         if (method_exists("NewsController", $method)){
             $this->$method();
             return VIEWS_PATH.DS."news".DS.$method.".html";
@@ -189,11 +189,24 @@ class NewsController extends Controller
             }
             Router::redirect('/admin/news/');
         }
-        // pr($this->params);
+
         $this->data['sections'] = $this->model->getSections();
         $this->data['item'] = $this->model->getByAlias($this->params[1]);
-        // pr($this->data['item']);
+
         if(empty($this->data['item']))
             Session::setFlash("Error.");        
-    }         
+    }   
+
+    public function admin_detail_delete()
+    {
+        if ( isset($this->params[1]) ){
+            $result = $this->model->deleteDetail($this->params[1]);
+            if ($result){
+                Session::setFlash("Page was saved.");
+            } else {
+                Session::setFlash("Error.");
+            }
+        }
+        Router::redirect('/admin/news/section/');
+    }          
 }

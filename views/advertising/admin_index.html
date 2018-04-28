@@ -1,0 +1,34 @@
+<h3>Advertising</h3><br>
+<table class="table table-striped" style="">
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Vendor</th>
+        <th>Price</th>
+        <th>Cupon</th>
+        <th></th>
+    </tr>
+    <?php foreach ($data["items"] as $key => $item):?>
+    <tr>
+        <td><?=$key+1?></td>
+        <td><b><?=$item["title"]?></b></td>
+        <td><?=$item["vendor"]?></td>
+        <td><?=$item["price"]?></td>
+        <td><?=$item["cupon"]?></td>
+        <td align="right">
+            <a href="/admin/advertising/edit/<?=$item['id']?>">
+                <button class="btn btn-sm btn-primary">edit</button>
+            </a>
+            <a href="/admin/advertising/delete/<?=$item['id']?>" onclick="return confirmDelete()">
+                <button class="btn btn-sm btn-warning">delete</button>
+            </a>
+        </td>
+    </tr>
+    <?php endforeach;?>
+</table>
+
+<br>
+
+<div class="new-page-btn">
+    <a href="/admin/advertising/add/"><button class="btn btn-sm btn-success">New advertising</button></a>
+</div>

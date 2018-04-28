@@ -1,0 +1,22 @@
+<h3>Edit menu item</h3><br>
+<form action="" method="post">
+    <input type="hidden" name="id" value="<?=$data['item']['id']?>" class="form-control">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="<?=$data['item']['title']?>" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="url">Url</label>
+        <input type="text" id="url" name="url" value="<?=$data['item']['url']?>" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="root_id">Root menu</label>
+        <select class="form-control" id="root_id" name="root_id">
+            <option value="0" <?if ($data['item']['root_id'] == 0) echo 'selected';?>>In root menu</option>
+            <?foreach ($data["sections"] as $id => $title):?>
+                <option value="<?=$id?>" <?if ($data['item']['root_id'] == $id) echo 'selected';?>><?=$title?></option>
+            <?endforeach;?>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-success" value="Edit">
+</form>

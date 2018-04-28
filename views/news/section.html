@@ -28,7 +28,7 @@
 </form>
 
 <!-- news -->
-<h5>News list</h5>
+<h5><?=$data['section']['title']?></h5>
 <div class="list-group">
 <?php foreach ($data["items"] as $item):?>
   <a href="/news/detail/<?=$item['alias']?>" class="list-group-item list-group-item-action">

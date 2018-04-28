@@ -40,7 +40,7 @@
                       <a class="dropdown-item" href="#">Section2</a>
                       <a class="dropdown-item" href="#">Section3</a>
                     </div>
-                </li>                
+                </li>             
             </ul>
         <div class="btn-group dropdown">
             <form 
@@ -61,32 +61,45 @@
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
               <div class="dropdown-menu"></div> 
             </form>  
+            <ul class="navbar-nav mr-auto">
+                <?php if (Session::get('login')):?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout/">Logout</a>
+                </li>
+                <?php else:?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login/">Login</a>
+                </li>                    
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register/">Register</a>
+                </li>
+                <?php endif;?>                
+            </ul>            
         </div>         
         </div>
     </nav>
 
     <main role="main" class="container">
-<div class="row">
-<div class="col-2">
-  реклама
-</div>
-<div class="col-8">
-        <div class="starter-template">
-
-            <?php if ( Session::hasFlash() ):?>
-            <div class="alert alert-info" role="alert">
-                <?=Session::flash()?>
+        <div class="row">
+            <div class="col-2">
+              реклама
             </div>
-            <?php endif;?>
+            <div class="col-8">
+                <div class="starter-template">
 
-            <?php echo $data['content'];?>
+                    <?php if ( Session::hasFlash() ):?>
+                    <div class="alert alert-info" role="alert">
+                        <?=Session::flash()?>
+                    </div>
+                    <?php endif;?>
+
+                    <?php echo $data['content'];?>
+                </div>
+            </div>
+            <div class="col-2">
+              реклама
+            </div>
         </div>
-</div>
-<div class="col-2">
-  реклама
-</div>
-</div>
-
     </main>
 
     <!-- Modal begin -->

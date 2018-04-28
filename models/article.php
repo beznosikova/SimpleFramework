@@ -221,20 +221,30 @@ class Article extends Model
         $date = date("Y-m-d");
 
         if (!empty($data["photo"]["name"]) && $data["photo"]["error"] == UPLOAD_ERR_OK) {
-            $dir = "/uploads";
+            $dir = "/webroot/uploads";
             $tmp_name = $data["photo"]["tmp_name"];
             $name = basename($data["photo"]["name"]);
-            if (move_uploaded_file($tmp_name, "$dir/$name"))
-                $sqlFields[] = "photo_name = {$data["photo"]["name"]}";
+            if (move_uploaded_file($tmp_name, "{$_SERVER['DOCUMENT_ROOT']}$dir/$name"))
+                $sqlFields[] = "photo_name = '{$data["photo"]["name"]}'";
         }
 
         if (!$id) { // Add new record
             $sqlFields[] = "data = '{$date}'";
             $sql = "insert into news set " . implode(", ", $sqlFields);
         } else { // Update existing record
-            $sql = "update news set " . implode(", ", $sqlFields) . "where id = {$id}";
+            $sql = "update news set " . implode(", ", $sqlFields) . " where id = {$id}";
         }
-    
+
+        return $this->db->query($sql);
+    }
+
+    public function deleteDetail($alias)
+    {
+        if (!isset($alias))
+            return false;
+
+        $alias = $this->db->escape($alias);        
+        $sql = "delete from news where alias = '{$alias}'";
         return $this->db->query($sql);
     }    
 }
