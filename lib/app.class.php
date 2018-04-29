@@ -42,16 +42,51 @@ class App
             throw new Exception("Method ".$controller_method." of class ".$controller_class. " does not exist!");
         }
 
-        // //menu 
-        // $pages_controller = new PagesController();
-        // $pages_controller->index();
-        // pr($pages_controller->getData());
-        // $view_pages = new View($pages_controller->getData());
-        // $pages = $view_pages->render();
-        // pr($pages);
+        /*  ---- menu ---   */
+        $menu_controller = new MenuController();
+        $view_path = $menu_controller->template();
+        $view_menu = new View($menu_controller->getData(), $view_path);
+        $menu = $view_menu->render();
+        /* ---------------------*/
+
+        /* --------template -----*/
+        $theme_model = new Template();
+        $header_color = $theme_model->getStyleByAlias('header_color');
+        $body_color = $theme_model->getStyleByAlias('body_color');
+        /*-----------------------*/
+
+        /* ------ advertising ----------- */
+        $advert_controller = new AdvertisingController();
+        $view_path = $advert_controller->template();
+        $advert_data = array_chunk($advert_controller->getData()['items'], 4);
+        $view_advert_left = new View($advert_data[0], $view_path);
+        $view_advert_right = new View($advert_data[1], $view_path);
+        $advert_left = $view_advert_left->render();
+        $advert_right = $view_advert_right->render();
+        /* ------ end --- advertising --- */
+
+        /*  ---- menu ---   */
+        if ( App::getRouter()->getUri() == "" ){
+            $slider_controller = new NewsController();
+            $view_path = $slider_controller->template();
+            $view_slider = new View($slider_controller->getData(), $view_path);
+            $slider = $view_slider->render();
+        }
+        /* ---------------------*/
 
         $layout_path = VIEWS_PATH.DS. $layout.'.html';
-        $layout_view_object = new View(compact('content'), $layout_path);
+        $layout_view_object = new View(
+            compact(
+                'content', 
+                'menu', 
+                'header_color', 
+                'body_color',
+                'advert_left',
+                'advert_right',
+                'slider'
+            ), 
+            $layout_path
+        );
         echo $layout_view_object->render();
     }
 }

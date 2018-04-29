@@ -1,0 +1,12 @@
+<?php foreach($data as $product):?>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><?=$product['title']?></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><?=$product['vendor']?></h6>
+    <p class="card-text">price - <span data-price="<?=$product['price']?>">$<?=$product['price']?></span></p>
+    <p class="card-text cupon-10">
+        Discount coupon - .. <?=$product['cupon']?> .. - apply and get 10% discount
+    </p>
+  </div>
+</div>  
+<?endforeach;?>

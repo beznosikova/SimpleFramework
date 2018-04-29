@@ -14,19 +14,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="/"><?=Config::get('site_name')?> - <?=__('lng.admin', 'Admin section')?></a>
+<div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #343a40!important">
+        <a class="navbar-brand" href="/"><?=Config::get('site_name')?> - <?=__('lng.admin', 'Admin section')?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <?php if (Session::get('login')):?>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <?php if (Session::get('login')):?>            
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/admin/users/logout/">Logout</a>
-            </li>
-        </ul>
+            </li>          
+        </ul>      
         <?php endif;?>
-    </div>
-</nav>
+      </div>
+    </nav>
+</div>
 
 <main role="main" class="container">
     <div class="row">

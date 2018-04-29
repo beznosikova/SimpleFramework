@@ -7,6 +7,12 @@ class AdvertisingController extends Controller
         $this->model = new Advert();
     }
 
+    public function template()
+    {
+        $this->data['items'] = $this->model->getList();
+        return VIEWS_PATH.DS."advertising".DS."template.html";
+    }    
+
     public function admin_index()
     {
         $this->data['items'] = $this->model->getList();

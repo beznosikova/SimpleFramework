@@ -15,89 +15,75 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script data-require="MomentJS@2.10.0" data-semver="2.10.0" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 </head>
-<body>
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<body style="background-color: <?php echo $data['body_color'];?>!important">
+<div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: <?php echo $data['header_color'];?>!important">
         <a class="navbar-brand" href="/"><?=Config::get('site_name')?></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item <?if (App::getRouter()->getController() == 'pages') echo 'active'?>">
-                    <a class="nav-link" href="/pages/">Pages</a>
-                </li>
-                <li class="nav-item  <?if (App::getRouter()->getController() == 'contacts') echo 'active'?>">
-                    <a class="nav-link" href="/contacts/">Contact us</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                      <a class="dropdown-item" href="#">Section1</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#">Section1</a>
-                            <a class="dropdown-item" href="#">Section2</a>
-                            <a class="dropdown-item" href="#">Section3</a>
-                        </div>
-                      <a class="dropdown-item" href="#">Section2</a>
-                      <a class="dropdown-item" href="#">Section3</a>
-                    </div>
-                </li>             
-            </ul>
-        <div class="btn-group dropdown">
-            <form 
-                class="form-inline my-2 my-lg-0" 
-                method="get" 
-                action="/news/search/"
-                id="form-search" 
-                >
-              <input 
-                class="form-control mr-sm-2" 
-                type="text" 
-                placeholder="Search" 
-                aria-label="Search" 
-                id="search-top"
-                name="tags[]" 
-                autocomplete="off"
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <?php echo $data['menu'];?>  
+        <form 
+            class="form-inline my-2 my-lg-0 dropdown" 
+            method="get" 
+            action="/news/search/"
+            id="form-search" 
             >
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              <div class="dropdown-menu"></div> 
-            </form>  
-            <ul class="navbar-nav mr-auto">
-                <?php if (Session::get('login')):?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/logout/">Logout</a>
-                </li>
-                <?php else:?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/login/">Login</a>
-                </li>                    
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/register/">Register</a>
-                </li>
-                <?php endif;?>                
-            </ul>            
-        </div>         
-        </div>
+          <input 
+            class="form-control mr-sm-2" 
+            type="text" 
+            placeholder="Search news by tag" 
+            aria-label="Search" 
+            id="search-top"
+            name="tags[]" 
+            autocomplete="off"
+        >
+          <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+          <div class="dropdown-menu"></div> 
+        </form>        
+        <ul class="navbar-nav mr-auto nav-user">
+            <?php if (Session::get('login')):?>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/logout/">Logout</a>
+            </li>
+            <?php else:?>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/login/">Login</a>
+            </li>                    
+            <li class="nav-item">
+                <a class="nav-link" href="/users/register/">Register</a>
+            </li>
+            <?php endif;?>                
+        </ul>
+      </div>
     </nav>
+</div>
 
     <main role="main" class="container">
         <div class="row">
-            <div class="col-2">
-              реклама
+            <div class="col-2 products-advert js-advert-left">
+                <?php echo $data['advert_left'];?>
             </div>
             <div class="col-8">
                 <div class="starter-template">
+                    <?php if ( App::getRouter()->getUri() != "" ):?>
+                    
+                        <?php if ( Session::hasFlash() ):?>
+                        <div class="alert alert-info" role="alert">
+                            <?=Session::flash()?>
+                        </div>
+                        <?php endif;?>
 
-                    <?php if ( Session::hasFlash() ):?>
-                    <div class="alert alert-info" role="alert">
-                        <?=Session::flash()?>
-                    </div>
+                        <?php echo $data['content'];?>
+                    <?php else:?>
+                        <?php echo $data['slider'];?>
                     <?php endif;?>
-
-                    <?php echo $data['content'];?>
                 </div>
             </div>
-            <div class="col-2">
-              реклама
+            <div class="col-2 products-advert js-advert-right">
+              <?php echo $data['advert_right'];?>
             </div>
         </div>
     </main>

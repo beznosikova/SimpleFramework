@@ -7,6 +7,27 @@ class UsersController extends Controller
         $this->model = new User();
     }
 
+    public function login()
+    {
+        if ($_POST && isset($_POST['login']) && isset($_POST['password'])){
+            $user = $this->model->getByLogin($_POST['login']);
+            $hash = md5(Config::get('salt').$_POST['password']);
+            if ($user && $user['is_active'] && $hash == $user['password']){
+                Session::set('login', $user['login']);
+                Session::set('role', $user['role']);
+            }
+            Router::redirect('/');
+        }
+
+        return VIEWS_PATH.DS."users".DS."admin_login.html";
+    }    
+
+    public function logout()
+    {
+        Session::destroy();
+        Router::redirect('/');
+    }
+
     public function admin_login()
     {
         if ($_POST && isset($_POST['login']) && isset($_POST['password'])){
@@ -50,6 +71,7 @@ class UsersController extends Controller
                     Session::set('login', $login);
                     Session::set('role', 'user');
                     $this->data = "success";
+                    Router::redirect('/');
                 }
             } else {
                 $this->data = $data;

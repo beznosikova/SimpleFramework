@@ -1,5 +1,11 @@
 <h3>Theme</h3><br>
 <table class="table">
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Alias</th>
+        <th></th>
+    </tr>
     <?php foreach ($data["items"] as $item):?>
     <form action="" method="post">
     <input type="hidden" name="id" value="<?=$item['id']?>">
@@ -8,6 +14,7 @@
             <input type="color" value="<?=$item['content']?>" name="content">
         </td>
         <td><b><?=$item["title"]?></b></td>
+        <td><?=$item["alias"]?></td>
         <td align="right">
             <a href="/admin/theme/edit/<?=$page['id']?>"><button class="btn btn-sm btn-primary">save</button></a>
         </td>

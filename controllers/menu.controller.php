@@ -7,6 +7,17 @@ class MenuController extends Controller
         $this->model = new Nav();
     }
 
+    public function template()
+    {
+        $items = $this->model->getList();
+        $menu = [];
+        foreach ($items as $item) {
+            $menu[$item['root_id']][] = $item;
+        }
+        $this->data['items'] = $menu;
+        return VIEWS_PATH.DS."menu".DS."template.html";
+    }
+
     public function admin_index()
     {
         if ($_POST){

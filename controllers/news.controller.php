@@ -9,6 +9,12 @@ class NewsController extends Controller
         $this->model = new Article();
     }
 
+    public function template()
+    {
+        $this->data['items'] = $this->model->getLastNews();
+        return VIEWS_PATH.DS."news".DS."template.html";
+    }
+
     public function index()
     {
         $this->data['sections'] = $this->model->getSections();

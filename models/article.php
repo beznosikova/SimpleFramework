@@ -18,6 +18,12 @@ class Article extends Model
         return $this->db->query($sql);
     }
 
+    public function getLastNews($limit = 4)
+    {
+        $sql = "SELECT alias, title, data, photo_name FROM news WHERE photo_name != '' ORDER BY data DESC LIMIT {$limit}";
+        return $this->db->query($sql);
+    }      
+
     public function getSectionListCount($sectionAlias)
     {
         $sectionAlias = $this->db->escape($sectionAlias);

@@ -1,0 +1,31 @@
+<?//pr($data)?>
+
+<ul class="navbar-nav mr-auto">
+  <?foreach ($data['items'][0] as $item):?>
+    <?php if (empty($data['items'][$item['id']])):?>
+    <li class="nav-item">
+        <a class="nav-link" href="<?=$item['url']?>"><?=$item['title']?></a>
+    </li>
+    <?php else:?>
+	<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="<?=$item['url']?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	  <?=$item['title']?>
+	</a>
+	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<?foreach ($data['items'][$item['id']] as $itemSecond):?>
+			<a class="dropdown-item" href="<?=$itemSecond['url']?>"><?=$itemSecond['title']?></a>
+			<?php if (!empty($data['items'][$itemSecond['id']])):?>
+				<div class="sub-dropdown">
+					<?foreach ($data['items'][$itemSecond['id']] as $itemThird):?>
+						<a class="dropdown-item" href="<?=$itemThird['url']?>">
+							<?=$itemThird['title']?>
+						</a>
+					<?endforeach;?>
+				</div>				
+			<?endif;?>
+		<?endforeach;?>
+	</div>
+	</li>
+    <?endif;?>
+  <?endforeach;?>
+</ul>
