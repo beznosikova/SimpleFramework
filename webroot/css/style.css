@@ -98,6 +98,17 @@ input {width: 100%;}
   color: #EC6E18;
 }
 .w-100 {height: 300px;}
+.list-group-item.active {
+  background-color: #656F69;
+  border-color: #90959A;  
+}
+.starter-template{padding-top: 10px;}
+
+.main-section-list{
+  list-style-type: none;
+  padding-left: 0;
+  text-align: left;  
+}
 
 @media screen and (max-width: 768px) {
     .navbar-fixed-left {position: relative;}

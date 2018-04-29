@@ -20,9 +20,17 @@ class Article extends Model
 
     public function getLastNews($limit = 4)
     {
+        $limit = (int) $limit;
         $sql = "SELECT alias, title, data, photo_name FROM news WHERE photo_name != '' ORDER BY data DESC LIMIT {$limit}";
         return $this->db->query($sql);
     }      
+
+    public function getLastNewsFromSections($limit = 5)
+    {
+        $limit = (int) $limit;
+        $sql = "SELECT t1.`id`, t1.`section`, t1.`title`, t1.`alias`, COUNT(*) as `counter` FROM `news` t1 JOIN `news` t2 ON t1.`section` = t2.`section` AND t1.`id` <= t2.`id` GROUP BY t1.`section`, t1.`id` HAVING `counter` <= {$limit} ORDER BY `section`, `id` DESC";
+        return $this->db->query($sql);
+    }        
 
     public function getSectionListCount($sectionAlias)
     {

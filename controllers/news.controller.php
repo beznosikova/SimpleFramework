@@ -15,6 +15,19 @@ class NewsController extends Controller
         return VIEWS_PATH.DS."news".DS."template.html";
     }
 
+    public function main_sections()
+    {
+        $data = $this->model->getLastNewsFromSections();
+        $items = [];
+        foreach ($data as $item) {
+            $items[$item['section']][] = $item;
+        }
+
+        $this->data['items'] = $items;
+        $this->data['sections'] = $this->model->getSections();
+        return VIEWS_PATH.DS."news".DS."main_sections.html";
+    }    
+
     public function index()
     {
         $this->data['sections'] = $this->model->getSections();

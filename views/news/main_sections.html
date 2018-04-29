@@ -1,0 +1,36 @@
+<?//pr($data)?>
+<h5>Last news in sections</h5><br>
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+    	<?foreach ($data['sections'] as $key => $section):?>
+			<a 
+				class="list-group-item list-group-item-action <?if ($key == 0) echo 'active';?>" 
+				id="list-home-list" 
+				data-toggle="list" 
+				href="#<?=$section['alias']?>" 
+				role="tab" 
+				aria-controls="home">
+				<?=$section['title']?>
+			</a>
+      	<?endforeach;?>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+    	<?foreach ($data['sections'] as $key => $section):?>
+			<div 
+				class="tab-pane fade show <?if ($key == 0) echo 'active';?>" 
+				id="<?=$section['alias']?>" 
+				role="tabpanel" 
+				aria-labelledby="list-home-list">
+				<ul class="main-section-list">
+					<?foreach ($data['items'][$section['id']] as $key => $item):?>
+						<li><a href="/news/detail/<?=$item['alias']?>"><?=$item['title']?></a></li>
+					<?endforeach;?>
+				</ul>
+			</div>
+		<?endforeach;?>
+    </div>
+  </div>
+</div>

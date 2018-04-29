@@ -65,14 +65,22 @@ class App
         $advert_right = $view_advert_right->render();
         /* ------ end --- advertising --- */
 
-        /*  ---- menu ---   */
+        /*  ---- main page ---   */
         if ( App::getRouter()->getUri() == "" ){
-            $slider_controller = new NewsController();
-            $view_path = $slider_controller->template();
-            $view_slider = new View($slider_controller->getData(), $view_path);
+            // slider
+            $news_controller = new NewsController();
+            $view_path = $news_controller->template();
+            $view_slider = new View($news_controller->getData(), $view_path);
             $slider = $view_slider->render();
+
+            // main_sections
+            $view_path = $news_controller->main_sections();
+            $view_main_sections = new View($news_controller->getData(), $view_path);
+            $main_sections = $view_main_sections->render();
+
         }
         /* ---------------------*/
+
 
         $layout_path = VIEWS_PATH.DS. $layout.'.html';
         $layout_view_object = new View(
@@ -83,6 +91,7 @@ class App
                 'body_color',
                 'advert_left',
                 'advert_right',
+                'main_sections',
                 'slider'
             ), 
             $layout_path
